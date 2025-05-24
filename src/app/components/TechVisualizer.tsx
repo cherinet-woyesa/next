@@ -2,13 +2,13 @@
 
 import { useRef, useState } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls, useTexture, Text3D } from '@react-three/drei';
+import { OrbitControls, Text3D } from '@react-three/drei';
 import * as THREE from 'three';
 
 const TechSphere = () => {
   const meshRef = useRef<THREE.Mesh>(null);
   const [hovered, setHover] = useState<string | null>(null);
-  
+
   // Tech stack data with positions on a sphere
   const techItems = [
     { name: 'React', position: [1.2, 0.5, 0], color: '#61DAFB', size: 0.8 },
@@ -22,7 +22,7 @@ const TechSphere = () => {
   ];
 
   // Animation for the sphere
-  useFrame((state) => {
+  useFrame(() => {
     if (meshRef.current) {
       meshRef.current.rotation.y += 0.002;
     }
@@ -74,11 +74,10 @@ const TechSphere = () => {
           {/* Connection line to center */}
           <line>
             <bufferGeometry attach="geometry">
-            <bufferAttribute
-  attach="attributes-position"
-  args={[new Float32Array([0, 0, 0, ...tech.position]), 3]}
-/>
-
+              <bufferAttribute
+                attach="attributes-position"
+                args={[new Float32Array([0, 0, 0, ...tech.position]), 3]}
+              />
             </bufferGeometry>
             <lineBasicMaterial attach="material" color="#6D28D9" opacity={0.5} transparent />
           </line>

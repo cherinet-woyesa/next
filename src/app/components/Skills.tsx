@@ -3,7 +3,8 @@ import TechVisualizer from './TechVisualizer';
 
 import { motion } from 'framer-motion';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Pagination, EffectCoverflow } from 'swiper/modules';
+import { Pagination } from 'swiper/modules';
+import { EffectCoverflow } from 'swiper/modules';
 import Image from 'next/image';
 import { FaCode, FaServer, FaMobileAlt, FaDatabase, FaCloud, FaChartLine, FaShieldAlt } from 'react-icons/fa';
 import 'swiper/css';

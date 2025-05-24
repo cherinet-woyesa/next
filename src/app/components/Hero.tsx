@@ -4,12 +4,9 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { FaGithub, FaLinkedin, FaTwitter, FaFileDownload, FaSun, FaMoon, FaTelegram, FaFacebook, FaInstagram } from 'react-icons/fa';
-import { useRouter } from 'next/router';
 import { useInView } from 'react-intersection-observer';
 
 const Hero = () => {
-  const [scrollY, setScrollY] = useState(0);
-  const [loaded, setLoaded] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const { ref, inView } = useInView({
     triggerOnce: true,
@@ -17,33 +14,21 @@ const Hero = () => {
   });
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-    
-    window.addEventListener('scroll', handleScroll);
-    setLoaded(true);
-    
     // Check for dark mode preference
     if (typeof window !== 'undefined') {
       setDarkMode(window.matchMedia('(prefers-color-scheme: dark)').matches);
     }
-    
-    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    // Check for dark mode preference
+    setDarkMode(window.matchMedia('(prefers-color-scheme: dark)').matches);
   }, []);
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
     document.documentElement.classList.toggle('dark', !darkMode);
   };
-
-  const roles = [
-    "Full Stack Developer",
-    "UI/UX Enthusiast",
-    "Problem Solver",
-    "Tech Innovator",
-    "Open Source Contributor"
-  ];
 
   const socialLinks = [
     { icon: <FaGithub />, url: "https://github.com/yourusername" },
@@ -116,13 +101,16 @@ const Hero = () => {
       <div className="container mx-auto px-4 text-center relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: loaded && inView ? 1 : 0, y: loaded && inView ? 0 : 20 }}
+          animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 20 }}
           transition={{ duration: 0.8 }}
         >
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight">
-            Hi, I'm <span className="text-yellow-300 bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-500">Cherinet Woyesa</span>
+            Hi, I&apos;m <span className="text-yellow-300 bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-500">Cherinet Woyesa</span>
           </h1>
           
+          <p className="text-2xl text-gray-600 dark:text-gray-400 mb-8">Full Stack Developer</p>
+          <p className="text-2xl text-gray-600 dark:text-gray-400 mb-8">Full Stack Developer</p>
+
           <div className="text-xl md:text-2xl mb-8 min-h-[60px] font-mono">
             <motion.div
               initial={{ opacity: 0 }}
@@ -130,7 +118,7 @@ const Hero = () => {
               transition={{ delay: 0.5 }}
               className="inline-block"
             >
-              Full Stack Developer
+              I&apos;m a passionate Full Stack Developer with 5+ years of experience.
             </motion.div>
           </div>
 

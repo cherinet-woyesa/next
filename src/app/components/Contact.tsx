@@ -1,11 +1,9 @@
 'use client';
 
-import { useState, useEffect, useRef, FormEvent, ChangeEvent, FocusEvent } from 'react';
+import { useState, useRef, FormEvent, ChangeEvent, FocusEvent } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiSend, FiClock, FiMapPin, FiCheckCircle, FiXCircle } from 'react-icons/fi';
+import { FiSend, FiClock, FiCheckCircle, FiXCircle } from 'react-icons/fi';
 import { Calendar } from './Calendar';
-import { Chatbot } from './Chatbot';
-import { TimezoneDetector } from './TimezoneDetector';
 
 interface FormData {
   name: string;
@@ -19,10 +17,7 @@ interface FormErrors {
   [key: string]: string;
 }
 
-interface CalendarSlot {
-  date: Date;
-  available: boolean;
-}
+
 
 const ContactPage = () => {
   // Form state
@@ -34,18 +29,9 @@ const ContactPage = () => {
     urgency: 'normal'
   });
   const [errors, setErrors] = useState<FormErrors>({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'success' | 'error' | null>(null);
+  const [loading, setLoading] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
-
-  // Chatbot state
-  const [chatbotOpen, setChatbotOpen] = useState(false);
-  const [chatbotStep, setChatbotStep] = useState('welcome');
-  const [chatbotAnswers, setChatbotAnswers] = useState<Record<string, string>>({});
-
-  // Timezone detection
-  const [userTimezone, setUserTimezone] = useState<number>(0);
-  const [userLocation, setUserLocation] = useState('');
 
   // Form validation
   const validateField = (name: string, value: string): boolean => {
@@ -99,16 +85,13 @@ const ContactPage = () => {
     });
     
     if (!isValid) return;
-    
-    setIsSubmitting(true);
-    
+
     try {
       // Simulate API call
+      setLoading(true);
       await new Promise(resolve => setTimeout(resolve, 1500));
-      setSubmitStatus('success');
-      if (formRef.current) {
-        formRef.current.reset();
-      }
+      
+      // Reset form
       setFormData({
         name: '',
         email: '',
@@ -116,35 +99,18 @@ const ContactPage = () => {
         projectType: '',
         urgency: 'normal'
       });
-    } catch (error) {
+      setErrors({});
+      setSubmitStatus('success');
+    } catch {
       setSubmitStatus('error');
     } finally {
-      setIsSubmitting(false);
+      setLoading(false);
     }
   };
 
-  // Chatbot handlers
-  const handleChatbotAnswer = (question: string, answer: string) => {
-    setChatbotAnswers(prev => ({ ...prev, [question]: answer }));
-    
-    // Auto-fill form based on chatbot answers
-    if (question === 'projectType') {
-      setFormData(prev => ({ ...prev, projectType: answer }));
-    }
-  };
 
-  // Detect user timezone and location
-  useEffect(() => {
-    TimezoneDetector.detect().then(({ timezone, location }) => {
-      // Convert IANA timezone to minutes offset
-      const date = new Date();
-      const offset = date.getTimezoneOffset();
-      setUserTimezone(-offset); // Negative because getTimezoneOffset returns opposite of what we need
-      setUserLocation(location);
-    });
-  }, []);
 
-  const handleSlotSelect = (slot: CalendarSlot) => {
+  const handleSlotSelect = () => {
     // Handle slot selection
   };
 
@@ -158,7 +124,7 @@ const ContactPage = () => {
           className="text-center mb-16"
         >
           <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
-            Let's Connect
+            Let&apos;s Connect
           </h1>
           <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             Have a project in mind or want to discuss opportunities? Reach out through any channel below.
@@ -251,10 +217,10 @@ const ContactPage = () => {
               <div className="flex items-center gap-4">
                 <button
                   type="submit"
-                  disabled={isSubmitting}
+                  disabled={loading}
                   className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-70"
                 >
-                  {isSubmitting ? (
+                  {loading ? (
                     'Sending...'
                   ) : (
                     <>
@@ -262,13 +228,6 @@ const ContactPage = () => {
                     </>
                   )}
                 </button>
-
-                <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
-                  <FiMapPin />
-                  <span>
-                    {userLocation || 'Detecting your location...'}
-                  </span>
-                </div>
               </div>
 
               <AnimatePresence>
@@ -280,7 +239,7 @@ const ContactPage = () => {
                     className="flex items-center gap-2 p-3 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 rounded-lg"
                   >
                     <FiCheckCircle className="text-lg" />
-                    <span>Message sent successfully! I'll get back to you soon.</span>
+                    <span>Message sent successfully! I&apos;ll get back to you soon.</span>
                   </motion.div>
                 )}
 
@@ -315,65 +274,16 @@ const ContactPage = () => {
               </p>
               
               <div className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-                <Calendar 
-                  timezone={userTimezone}
+                <Calendar
                   onSelectSlot={handleSlotSelect}
                 />
               </div>
-            </motion.div>
-
-            {/* AI Chatbot Trigger */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.4 }}
-              className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6"
-            >
-              <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-white">
-                Quick Questions?
-              </h2>
-              <p className="text-gray-600 dark:text-gray-300 mb-6">
-                My AI assistant can help answer common inquiries immediately.
-              </p>
-              
-              <button
-                onClick={() => setChatbotOpen(true)}
-                className="w-full px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg hover:opacity-90 transition-opacity"
-              >
-                Chat With My AI Assistant
-              </button>
             </motion.div>
           </div>
         </div>
       </div>
 
-      {/* AI Chatbot Modal */}
-      <AnimatePresence>
-        {chatbotOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
-            onClick={() => setChatbotOpen(false)}
-          >
-            <motion.div
-              initial={{ scale: 0.9, y: 20 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.9, y: 20 }}
-              className="bg-white dark:bg-gray-800 rounded-xl shadow-xl w-full max-w-md max-h-[80vh] overflow-hidden"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <Chatbot 
-                step={chatbotStep}
-                answers={chatbotAnswers}
-                onAnswer={handleChatbotAnswer}
-                onClose={() => setChatbotOpen(false)}
-              />
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+
     </div>
   );
 };

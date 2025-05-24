@@ -14,7 +14,7 @@ const About = () => {
     { name: 'Frontend', level: 90, icon: <FaCode className="text-blue-500" /> },
     { name: 'UI/UX Design', level: 85, icon: <FaPaintBrush className="text-purple-500" /> },
     { name: 'Backend', level: 80, icon: <FaServer className="text-green-500" /> },
-    { name: 'Mobile Dev', level: 75, icon: <FaMobile className="text-yellow-500" /> },
+    { name: 'Mobile Development', level: 75, icon: <FaMobile className="text-yellow-500" /> },
     { name: 'AI/ML', level: 70, icon: <FaBrain className="text-red-500" /> },
     { name: 'DevOps', level: 65, icon: <FaRocket className="text-indigo-500" /> },
   ];
@@ -44,19 +44,19 @@ const About = () => {
   // Testimonials
   const testimonials = [
     {
-      quote: "Cherinet delivered exceptional work on our project. His attention to detail and problem-solving skills are remarkable.",
+      quote: "I've always been fascinated by the intersection of technology and creativity. His attention to detail and problem-solving skills are remarkable.&apos;",
       author: "Sarah Johnson",
       position: "CEO, Tech Innovations Inc.",
       avatar: "/client1.jpg"
     },
     {
-      quote: "Working with Cherinet was a pleasure. He understands business requirements and translates them into perfect technical solutions.",
+      quote: "Working with Cherinet was a pleasure. He understands business requirements and translates them into perfect technical solutions.&apos;",
       author: "Michael Chen",
       position: "CTO, Digital Solutions Ltd.",
       avatar: "/client2.jpg"
     },
     {
-      quote: "One of the most professional developers I've worked with. Always delivers on time and exceeds expectations.",
+      quote: "What I've always been fascinated by the intersection of technology and creativity. Always delivers on time and exceeds expectations.&apos;",
       author: "Emily Rodriguez",
       position: "Product Manager, StartUp Ventures",
       avatar: "/client3.jpg"
@@ -100,7 +100,7 @@ const About = () => {
           </h2>
           <div className="w-20 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mb-6"></div>
           <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            Let me introduce myself and what I do
+            Let me introduce myself and what I&apos;do
           </p>
         </motion.div>
 
@@ -143,12 +143,12 @@ const About = () => {
             <div className="mb-8">
               <h3 className="text-2xl font-bold mb-4 text-gray-800 dark:text-white">Who am I?</h3>
               <p className="text-gray-600 dark:text-gray-300 mb-4">
-                I'm Cherinet Woyesa, a passionate Full Stack Developer with 5+ years of experience creating digital solutions that matter. 
+                I&apos;m Cherinet Woyesa, a passionate Full Stack Developer with 5+ years of experience creating digital solutions that matter. 
                 I specialize in building responsive, user-friendly web applications with modern technologies.
               </p>
               <p className="text-gray-600 dark:text-gray-300">
-                When I'm not coding, you can find me contributing to open-source projects, mentoring junior developers, 
-                or exploring the latest tech trends. I believe in continuous learning and pushing the boundaries of what's possible.
+                When I&apos;m not coding, you can find me contributing to open-source projects, mentoring junior developers, 
+                or exploring the latest tech trends. I believe in continuous learning and pushing the boundaries of what&apos;s possible.
               </p>
             </div>
 
@@ -293,7 +293,7 @@ const About = () => {
 
         {/* Client Logos */}
         <div className="mt-20">
-          <h3 className="text-3xl font-bold text-center mb-12 text-gray-800 dark:text-white">Companies I've Worked With</h3>
+          <h3 className="text-3xl font-bold text-center mb-12 text-gray-800 dark:text-white">Companies I&apos;ve Worked With</h3>
           <div className="flex flex-wrap justify-center gap-8 items-center">
             {clients.map((client, index) => (
               <motion.div

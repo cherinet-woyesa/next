@@ -4,11 +4,10 @@ import CalendarLib from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
 interface CalendarProps {
-  timezone: number;
   onSelectSlot: (slot: { date: Date; available: boolean }) => void;
 }
 
-export const Calendar = ({ timezone, onSelectSlot }: CalendarProps) => {
+export const Calendar = ({ onSelectSlot }: CalendarProps) => {
   // Disable weekends and past dates
   const tileDisabled = ({ date }: { date: Date }) => {
     const day = date.getDay();
@@ -17,7 +16,7 @@ export const Calendar = ({ timezone, onSelectSlot }: CalendarProps) => {
     return day === 0 || day === 6 || date < today;
   };
 
-  const handleChange = (value: unknown, event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleChange = (value: unknown) => {
     let date: Date | null = null;
     if (value instanceof Date) {
       date = value;
