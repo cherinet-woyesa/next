@@ -17,80 +17,43 @@ const SkillsPage = () => {
     {
       name: 'Frontend Development',
       icon: <FaCode className="text-blue-500 text-4xl" />,
-      skills: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Redux']
+      skills: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS']
     },
     {
       name: 'Backend Development',
       icon: <FaServer className="text-purple-500 text-4xl" />,
-      skills: ['Node.js', 'Express', 'Django', 'Spring Boot', 'GraphQL']
+      skills: ['Node.js', 'Express', 'Django', 'Spring Boot']
     },
     {
       name: 'Mobile Development',
       icon: <FaMobileAlt className="text-green-500 text-4xl" />,
-      skills: ['React Native', 'Flutter', 'Swift', 'Kotlin', 'Ionic']
+      skills: ['React Native', 'Flutter']
     },
     {
       name: 'Database',
       icon: <FaDatabase className="text-yellow-500 text-4xl" />,
-      skills: ['MongoDB', 'PostgreSQL', 'Firebase', 'MySQL', 'Redis']
+      skills: ['MongoDB', 'PostgreSQL', 'Firebase', 'MySQL']
     },
     {
       name: 'DevOps & Cloud',
       icon: <FaCloud className="text-red-500 text-4xl" />,
-      skills: ['Docker', 'Kubernetes', 'AWS', 'CI/CD', 'Terraform']
-    },
-    {
-      name: 'Data Science',
-      icon: <FaChartLine className="text-indigo-500 text-4xl" />,
-      skills: ['Python', 'Pandas', 'TensorFlow', 'PyTorch', 'Tableau']
-    },
-    {
-      name: 'Cybersecurity',
-      icon: <FaShieldAlt className="text-teal-500 text-4xl" />,
-      skills: ['OWASP', 'Pen Testing', 'JWT', 'OAuth', 'SSL/TLS']
+      skills: ['Docker']
     }
+    
   ];
 
   // Technology proficiency levels
   const techProficiency = [
-    { name: 'React', level: 95, logo: '/tech/react.png' },
-    { name: 'Node.js', level: 90, logo: '/tech/nodejs.png' },
-    { name: 'TypeScript', level: 88, logo: '/tech/typescript.png' },
-    { name: 'Next.js', level: 85, logo: '/tech/nextjs.png' },
-    { name: 'MongoDB', level: 83, logo: '/tech/mongodb.png' },
-    { name: 'AWS', level: 80, logo: '/tech/aws.png' },
-    { name: 'Docker', level: 78, logo: '/tech/docker.png' },
-    { name: 'Python', level: 75, logo: '/tech/python.png' }
+    { name: 'React', level: 95, logo: '/react.png' },
+    { name: 'Node.js', level: 90, logo: '/node.png' },
+    { name: 'TypeScript', level: 92, logo: '/ts.png' },
+    { name: 'Next.js', level: 85, logo: '/next.png' },
+    { name: 'MongoDB', level: 83, logo: '/mongodb.png' },
+    { name: 'Python', level: 75, logo: '/py.jfif' }
   ];
 
   // Certifications
-  const certifications = [
-    {
-      title: 'AWS Certified Developer',
-      issuer: 'Amazon Web Services',
-      date: '2023',
-      logo: '/certs/aws-certified.png'
-    },
-    {
-      title: 'Google Cloud Professional',
-      issuer: 'Google Cloud',
-      date: '2022',
-      logo: '/certs/google-cloud.png'
-    },
-    {
-      title: 'Microsoft Certified: Azure Developer',
-      issuer: 'Microsoft',
-      date: '2022',
-      logo: '/certs/azure-certified.png'
-    },
-    {
-      title: 'Certified Kubernetes Administrator',
-      issuer: 'Cloud Native Computing Foundation',
-      date: '2021',
-      logo: '/certs/cka.png'
-    }
-  ];
-
+  
   return (
     <section id="skills" className="py-20 bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
       <div className="container mx-auto px-4">
@@ -176,7 +139,7 @@ const SkillsPage = () => {
 
         {/* Certifications Carousel */}
         <div className="mb-20">
-          <h3 className="text-3xl font-bold text-center mb-12 text-gray-800 dark:text-white">Certifications</h3>
+          <h3 className="text-3xl font-bold text-center mb-12 text-gray-800 dark:text-white"></h3>
           <Swiper
             effect={'coverflow'}
             grabCursor={true}
@@ -192,33 +155,7 @@ const SkillsPage = () => {
             modules={[EffectCoverflow, Pagination]}
             className="mySwiper"
           >
-            {certifications.map((cert, index) => (
-              <SwiperSlide key={index} className="max-w-xs">
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5 }}
-                  viewport={{ once: true }}
-                  className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg h-full flex flex-col"
-                >
-                  <div className="relative w-full h-40 mb-4">
-                    <Image
-                      src={cert.logo}
-                      alt={cert.title}
-                      fill
-                      className="object-contain"
-                      loading="lazy"
-                    />
-                  </div>
-                  <h4 className="text-xl font-bold mb-2 text-gray-800 dark:text-white">{cert.title}</h4>
-                  <p className="text-gray-600 dark:text-gray-300 mb-1">Issuer: {cert.issuer}</p>
-                  <p className="text-gray-500 dark:text-gray-400 text-sm">Earned: {cert.date}</p>
-                  <button className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors self-start">
-                    View Credential
-                  </button>
-                </motion.div>
-              </SwiperSlide>
-            ))}
+            
           </Swiper>
         </div>
 

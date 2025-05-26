@@ -31,12 +31,11 @@ const Hero = () => {
   };
 
   const socialLinks = [
-    { icon: <FaGithub />, url: "https://github.com/yourusername" },
-    { icon: <FaLinkedin />, url: "https://linkedin.com/in/yourusername" },
-    { icon: <FaTwitter />, url: "https://twitter.com/yourusername" },
-    { icon: <FaTelegram />, url: "https://t.me/yourusername" },
-    { icon: <FaFacebook />, url: "https://facebook.com/yourusername" },
-    { icon: <FaInstagram />, url: "https://instagram.com/yourusername" }
+    { icon: <FaGithub />, url: "https://github.com/cherinet-woyesa" },
+    { icon: <FaLinkedin />, url: "https://linkedin.com/in/cherinet-woyesa" },
+    { icon: <FaTelegram />, url: "https://t.me/Cherishme" },
+    { icon: <FaFacebook />, url: "https://facebook.com/cherinet_" },
+    { icon: <FaInstagram />, url: "https://instagram.com/cherinetwoyesa" }
   ];
 
   return (
@@ -76,8 +75,8 @@ const Hero = () => {
           onChange={(e) => console.log('Language changed to:', e.target.value)}
         >
           <option value="en" className="bg-gray-800 text-white">English</option>
-          <option value="es" className="bg-gray-800 text-white">Español</option>
-          <option value="fr" className="bg-gray-800 text-white">Français</option>
+          <option value="am" className="bg-gray-800 text-white">Amharic</option>
+        
         </select>
       </div>
 
@@ -109,7 +108,7 @@ const Hero = () => {
           </h1>
           
           <p className="text-2xl text-gray-600 dark:text-gray-400 mb-8">Full Stack Developer</p>
-          <p className="text-2xl text-gray-600 dark:text-gray-400 mb-8">Full Stack Developer</p>
+
 
           <div className="text-xl md:text-2xl mb-8 min-h-[60px] font-mono">
             <motion.div
@@ -118,7 +117,7 @@ const Hero = () => {
               transition={{ delay: 0.5 }}
               className="inline-block"
             >
-              I&apos;m a passionate Full Stack Developer with 5+ years of experience.
+              I&apos;m a passionate Full Stack Developer with 2+ years of experience.
             </motion.div>
           </div>
 

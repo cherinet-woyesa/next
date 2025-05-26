@@ -12,11 +12,11 @@ const Projects = () => {
     {
       title: 'E-commerce Platform',
       description: 'A full-stack e-commerce platform with real-time inventory management, secure payments, and admin dashboard.',
-      technologies: ['React', 'Node.js', 'MongoDB', 'Express', 'Redux', 'Stripe'],
-      image: '/project1.jpg',
+      technologies: ['React', 'Node.js', 'MongoDB', 'Express', 'Stripe'],
+      image: '/ecom.jpg',
       category: 'fullstack',
-      github: 'https://github.com/yourusername/ecommerce',
-      live: 'https://ecommerce-demo.com',
+      github: 'https://github.com/cherinet-woyesa/modern_ecommerce',
+      //live: 'https://ecommerce-demo.com',
       features: [
         'User authentication and authorization',
         'Product search and filtering',
@@ -26,29 +26,29 @@ const Projects = () => {
       ]
     },
     {
-      title: 'Task Management App',
-      description: 'A collaborative task management application with real-time updates, team collaboration, and progress tracking.',
-      technologies: ['React', 'Firebase', 'Material-UI', 'Redux Toolkit'],
-      image: '/project2.jpg',
-      category: 'frontend',
-      github: 'https://github.com/yourusername/task-manager',
-      live: 'https://task-manager-demo.com',
+      title: 'Lalo',
+      description: 'A charity website an online platform designed to promote a nonprofit organization’s mission, raise awareness about its causes, and encourage donations or volunteer support.',
+      technologies: ['React', 'Firebase', 'strapi', ],
+      image: '/lalo.jpg',
+      category: 'full stack',
+      github: 'https://github.com/cherinet-woyesa/lalo',
+      //live: 'https://task-manager-demo.com',
       features: [
-        'Real-time task updates',
-        'Team collaboration features',
-        'Task assignment and tracking',
-        'Progress visualization',
-        'Email notifications'
+        ' Quick and secure donation options',
+        'Details of ongoing campaigns or programs',
+        'Sign-up form and opportunities',
+        'Success stories and testimonials',
+        'Contact form, address'
       ]
     },
     {
       title: 'Portfolio Website',
       description: 'A modern, responsive portfolio website showcasing projects and skills with smooth animations.',
       technologies: ['Next.js', 'Tailwind CSS', 'TypeScript', 'Framer Motion'],
-      image: '/project3.jpg',
+      image: '/portfolio.jpg',
       category: 'frontend',
-      github: 'https://github.com/yourusername/portfolio',
-      live: 'https://your-portfolio.com',
+      github: 'https://github.com/cherinet-woyesa/next',
+      live: 'https://cherinet-woyesa.netlify.app/',
       features: [
         'Responsive design',
         'Dark mode support',
@@ -58,18 +58,18 @@ const Projects = () => {
       ]
     },
     {
-      title: 'AI Chat Application',
-      description: 'An AI-powered chat application with natural language processing and real-time responses.',
-      technologies: ['Python', 'TensorFlow', 'React', 'WebSocket'],
-      image: '/project4.jpg',
-      category: 'ai',
-      github: 'https://github.com/yourusername/ai-chat',
-      live: 'https://ai-chat-demo.com',
+      title: 'Human resources management system',
+      description: 'A web-based human resources management system designed to streamline and automate the management of employee data, including payroll, benefits, and performance tracking.',
+      technologies: ['React', 'Node.js', 'MongoDB', 'Express'],
+      image: '/hr.jfif',
+      category: 'full stack',
+      //github: 'https://github.com/cherinet-woyesa/hr',
+      //live: 'https://ai-chat-demo.com',
       features: [
-        'Natural language processing',
-        'Real-time chat interface',
-        'Context-aware responses',
-        'Multi-language support',
+        'Employee management',
+        'Payroll processing',
+        'Benefits administration',
+        'Performance tracking',
         'Chat history management'
       ]
     }

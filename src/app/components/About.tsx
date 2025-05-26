@@ -13,8 +13,8 @@ const About = () => {
   const skills = [
     { name: 'Frontend', level: 90, icon: <FaCode className="text-blue-500" /> },
     { name: 'UI/UX Design', level: 85, icon: <FaPaintBrush className="text-purple-500" /> },
-    { name: 'Backend', level: 80, icon: <FaServer className="text-green-500" /> },
-    { name: 'Mobile Development', level: 75, icon: <FaMobile className="text-yellow-500" /> },
+    { name: 'Backend', level: 90, icon: <FaServer className="text-green-500" /> },
+    { name: 'Mobile Development', level: 80, icon: <FaMobile className="text-yellow-500" /> },
     { name: 'AI/ML', level: 70, icon: <FaBrain className="text-red-500" /> },
     { name: 'DevOps', level: 65, icon: <FaRocket className="text-indigo-500" /> },
   ];
@@ -22,22 +22,22 @@ const About = () => {
   // Experience timeline
   const experience = [
     {
-      year: '2022 - Present',
-      role: 'Senior Full Stack Developer',
-      company: 'Tech Innovations Inc.',
-      description: 'Leading development teams and architecting scalable web applications.'
+      year: '2024 - Present',
+      role: 'Full Stack Developer',
+      company: 'commercial bank of ethiopia',
+      description: 'Am working as a full stack developer in commercial bank of ethiopia'
     },
     {
-      year: '2019 - 2022',
-      role: 'Frontend Developer',
-      company: 'Digital Solutions Ltd.',
-      description: 'Built responsive UIs and implemented state management solutions.'
+      year: 'june 2023 - september 2024',
+      role: 'Full stack developer',
+      company: 'science and technology agency',
+      description: 'I worked as a intern in science and technology agency'
     },
     {
-      year: '2017 - 2019',
-      role: 'Junior Developer',
-      company: 'StartUp Ventures',
-      description: 'Contributed to various projects and learned modern web technologies.'
+      year: '2022 - present',
+      role: 'web development',
+      company: 'freelancer',
+      description: 'I worked as a freelancer in web development'
     }
   ];
 
@@ -45,43 +45,40 @@ const About = () => {
   const testimonials = [
     {
       quote: "I've always been fascinated by the intersection of technology and creativity. His attention to detail and problem-solving skills are remarkable.&apos;",
-      author: "Sarah Johnson",
-      position: "CEO, Tech Innovations Inc.",
-      avatar: "/client1.jpg"
+      author: "Genene tise",
+      position: "Team member",
+      avatar: "/av.png"
     },
     {
       quote: "Working with Cherinet was a pleasure. He understands business requirements and translates them into perfect technical solutions.&apos;",
-      author: "Michael Chen",
-      position: "CTO, Digital Solutions Ltd.",
-      avatar: "/client2.jpg"
+      author: "Zeleke",
+      position: "Mentor SSTA",
+      avatar: "/av.png"
     },
     {
-      quote: "What I've always been fascinated by the intersection of technology and creativity. Always delivers on time and exceeds expectations.&apos;",
-      author: "Emily Rodriguez",
-      position: "Product Manager, StartUp Ventures",
-      avatar: "/client3.jpg"
+      quote: "Cherinet is a great developer. He is always willing to help and is very patient.&apos;",
+      author: "Mintesnot",
+      position: "Team member",
+      avatar: "/av.png"
     }
+    
   ];
 
   // Tech stack for carousel
   const techStack = [
-    { name: 'React', logo: '/tech/react.png' },
-    { name: 'Next.js', logo: '/tech/nextjs.png' },
-    { name: 'Node.js', logo: '/tech/nodejs.png' },
-    { name: 'TypeScript', logo: '/tech/typescript.png' },
-    { name: 'Tailwind CSS', logo: '/tech/tailwind.png' },
-    { name: 'MongoDB', logo: '/tech/mongodb.png' },
-    { name: 'GraphQL', logo: '/tech/graphql.png' },
-    { name: 'Docker', logo: '/tech/docker.png' },
+    { name: 'React', logo: '/react.png' },
+    { name: 'Next.js', logo: '/next.png' },
+    { name: 'Node.js', logo: '/node.png' },
+    { name: 'TypeScript', logo: '/ts.png' },
+    { name: 'Tailwind CSS', logo: '/tailwind.png' },
+    { name: 'MongoDB', logo: '/mongodb.png' },
+    
   ];
 
   // Client logos
   const clients = [
-    '/clients/tech-innovations.png',
-    '/clients/digital-solutions.png',
-    '/clients/startup-ventures.png',
-    '/clients/global-tech.png',
-    '/clients/creative-labs.png'
+    '/cbe.jpg',
+    '/ssta.jpg'
   ];
 
   return (
@@ -143,13 +140,10 @@ const About = () => {
             <div className="mb-8">
               <h3 className="text-2xl font-bold mb-4 text-gray-800 dark:text-white">Who am I?</h3>
               <p className="text-gray-600 dark:text-gray-300 mb-4">
-                I&apos;m Cherinet Woyesa, a passionate Full Stack Developer with 5+ years of experience creating digital solutions that matter. 
+                I&apos;m Cherinet Woyesa, a passionate Full Stack Developer with 2+ years of experience creating digital solutions that matter. 
                 I specialize in building responsive, user-friendly web applications with modern technologies.
               </p>
-              <p className="text-gray-600 dark:text-gray-300">
-                When I&apos;m not coding, you can find me contributing to open-source projects, mentoring junior developers, 
-                or exploring the latest tech trends. I believe in continuous learning and pushing the boundaries of what&apos;s possible.
-              </p>
+              
             </div>
 
             {/* Skills */}
@@ -279,7 +273,8 @@ const About = () => {
                       <Image
                         src={tech.logo}
                         alt={tech.name}
-                        fill
+                        width={64}
+                        height={64}
                         className="object-contain"
                       />
                     </div>
