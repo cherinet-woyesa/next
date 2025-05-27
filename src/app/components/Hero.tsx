@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { FaGithub, FaLinkedin, FaTwitter, FaFileDownload, FaSun, FaMoon, FaTelegram, FaFacebook, FaInstagram } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaFileDownload, FaSun, FaMoon, FaTelegram, FaFacebook, FaInstagram } from 'react-icons/fa';
 import { useInView } from 'react-intersection-observer';
 
 const Hero = () => {

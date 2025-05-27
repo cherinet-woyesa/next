@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
 import { EffectCoverflow } from 'swiper/modules';
 import Image from 'next/image';
-import { FaCode, FaServer, FaMobileAlt, FaDatabase, FaCloud, FaChartLine, FaShieldAlt } from 'react-icons/fa';
+import { FaCode, FaServer, FaMobileAlt, FaDatabase, FaCloud } from 'react-icons/fa';
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
