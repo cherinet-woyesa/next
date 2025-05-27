@@ -2,7 +2,7 @@
 import TechVisualizer from './TechVisualizer';
 
 import { motion } from 'framer-motion';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
 import { EffectCoverflow } from 'swiper/modules';
 import Image from 'next/image';
