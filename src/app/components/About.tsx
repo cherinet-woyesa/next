@@ -45,8 +45,8 @@ const About = () => {
   const testimonials = [
     {
       quote: "I've always been fascinated by the intersection of technology and creativity. His attention to detail and problem-solving skills are remarkable.&apos;",
-      author: "Genene tise",
-      position: "Team member",
+      author: "Eyob",
+      position: "Director of SSTA",
       avatar: "/av.png"
     },
     {
@@ -57,8 +57,8 @@ const About = () => {
     },
     {
       quote: "Cherinet is a great developer. He is always willing to help and is very patient.&apos;",
-      author: "Mintesnot",
-      position: "Team member",
+      author: "Temesgen",
+      position: "client",
       avatar: "/av.png"
     }
     
@@ -140,7 +140,7 @@ const About = () => {
             <div className="mb-8">
               <h3 className="text-2xl font-bold mb-4 text-gray-800 dark:text-white">Who am I?</h3>
               <p className="text-gray-600 dark:text-gray-300 mb-4">
-                I&apos;m Cherinet Woyesa, a passionate Full Stack Developer with 2+ years of experience creating digital solutions that matter. 
+                I&apos;m Cherinet Woyesa, a passionated Full Stack Developer with 2+ years of experience creating digital solutions that matter. 
                 I specialize in building responsive, user-friendly web applications with modern technologies.
               </p>
               

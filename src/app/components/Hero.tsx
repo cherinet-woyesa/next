@@ -117,7 +117,7 @@ const Hero = () => {
               transition={{ delay: 0.5 }}
               className="inline-block"
             >
-              I&apos;m a passionate Full Stack Developer with 2+ years of experience.
+              I&apos;m a passionated Full Stack Developer with 2+ years of experience.
             </motion.div>
           </div>
 
@@ -133,7 +133,7 @@ const Hero = () => {
             </motion.a>
             
             <motion.a
-              href="/resume.pdf"
+              href="/CHERINET.pdf"
               download="Cherinet_Woyesa_Resume.pdf"
               className="relative border-2 border-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-blue-600 transition-colors duration-300 overflow-hidden group"
               whileHover={{ scale: 1.05 }}
