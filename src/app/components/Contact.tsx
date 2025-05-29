@@ -92,8 +92,8 @@ const Contact = () => {
         ...formData,
         timestamp: new Date().toISOString()
       });
-      
-      // Reset form
+      // The response is intentionally unused
+      // Reset form after successful submission
       setFormData({
         name: '',
         email: '',
