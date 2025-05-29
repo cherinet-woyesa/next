@@ -178,7 +178,7 @@ const About = () => {
             {/* Buttons */}
             <div className="flex flex-wrap gap-4 mb-12">
               <motion.a
-                href="/resume.pdf"
+                href="/CHERINET.pdf"
                 download
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -187,7 +187,7 @@ const About = () => {
                 Download Resume
               </motion.a>
               <motion.a
-                href="#contact"
+                href="/contact"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="px-6 py-3 border-2 border-blue-600 text-blue-600 dark:text-blue-400 dark:border-blue-400 rounded-full font-medium hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors"

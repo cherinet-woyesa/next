@@ -30,21 +30,19 @@ const Navbar = () => {
   }, []);
 
   const handleNavigation = (path: string) => {
-    if (path === '/contact') {
-      router.push('/contact');
-    } else {
-      const sectionId = path.slice(1); // Remove the leading slash
-      const element = document.getElementById(sectionId);
-      if (element) {
-        const offset = 80; // Account for navbar height
-        const elementPosition = element.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - offset;
+    const sectionId = path.slice(1); // Remove the leading slash
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const offset = 80; // Account for navbar height
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
 
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        });
-      }
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    } else {
+      router.push(path);
     }
   };
 

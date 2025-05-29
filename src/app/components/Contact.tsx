@@ -4,6 +4,8 @@ import { useState, useRef, FormEvent, ChangeEvent, FocusEvent } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiSend, FiClock, FiCheckCircle, FiXCircle } from 'react-icons/fi';
 import { Calendar } from './Calendar';
+import axios from 'axios';
+import toast from 'react-hot-toast';
 
 interface FormData {
   name: string;
@@ -17,9 +19,7 @@ interface FormErrors {
   [key: string]: string;
 }
 
-
-
-const ContactPage = () => {
+const Contact = () => {
   // Form state
   const [formData, setFormData] = useState<FormData>({
     name: '',
@@ -87,9 +87,11 @@ const ContactPage = () => {
     if (!isValid) return;
 
     try {
-      // Simulate API call
       setLoading(true);
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      const response = await axios.post('/api/contact', {
+        ...formData,
+        timestamp: new Date().toISOString()
+      });
       
       // Reset form
       setFormData({
@@ -101,21 +103,22 @@ const ContactPage = () => {
       });
       setErrors({});
       setSubmitStatus('success');
-    } catch {
+      toast.success('Message sent successfully! I will reply as soon as possible.');
+    } catch (error) {
+      console.error('Error submitting form:', error);
       setSubmitStatus('error');
+      toast.error('Sorry, there was an error sending your message. Please try again.');
     } finally {
       setLoading(false);
     }
   };
-
-
 
   const handleSlotSelect = () => {
     // Handle slot selection
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 py-20">
+    <div id="contact" className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 py-20">
       <div className="container mx-auto px-4">
         {/* Header */}
         <motion.div
@@ -288,4 +291,4 @@ const ContactPage = () => {
   );
 };
 
-export default ContactPage;
+export default Contact;

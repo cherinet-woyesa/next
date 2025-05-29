@@ -68,17 +68,7 @@ const Hero = () => {
         {darkMode ? <FaSun className="text-xl" /> : <FaMoon className="text-xl" />}
       </button>
 
-      {/* Language Selector */}
-      <div className="absolute top-6 left-6 z-50">
-        <select 
-          className="bg-white/20 backdrop-blur-sm text-white border border-white/30 rounded-md px-3 py-1 focus:outline-none focus:ring-2 focus:ring-white/50"
-          onChange={(e) => console.log('Language changed to:', e.target.value)}
-        >
-          <option value="en" className="bg-gray-800 text-white">English</option>
-          <option value="am" className="bg-gray-800 text-white">Amharic</option>
-        
-        </select>
-      </div>
+     
 
       {/* Social Links */}
       <div className="absolute left-6 top-20 z-50 hidden md:flex flex-col gap-4">
@@ -124,9 +114,22 @@ const Hero = () => {
           <div className="flex flex-wrap justify-center gap-4">
             <motion.a
               href="#contact"
-              className="relative bg-white text-blue-600 px-8 py-3 rounded-full font-semibold hover:bg-yellow-300 transition-colors duration-300 overflow-hidden group"
+              className="relative bg-white text-blue-600 px-8 py-3 rounded-full font-semibold hover:bg-yellow-300 transition-colors duration-300 overflow-hidden group cursor-pointer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={(e) => {
+                e.preventDefault();
+                const element = document.getElementById('contact');
+                if (element) {
+                  const offset = 80; // Account for navbar height
+                  const elementPosition = element.getBoundingClientRect().top;
+                  const offsetPosition = elementPosition + window.pageYOffset - offset;
+                  window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                  });
+                }
+              }}
             >
               <span className="relative z-10">Contact Me</span>
               <span className="absolute inset-0 bg-gradient-to-r from-yellow-300 to-yellow-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
