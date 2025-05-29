@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
 import { EffectCoverflow } from 'swiper/modules';
 import Image from 'next/image';
@@ -136,12 +136,26 @@ const SkillsPage = () => {
           </div>
         </div>
 
-        {/* Certifications Grid */}
+        {/* Certifications Carousel */}
         <div className="mb-20">
-          <h3 className="text-3xl font-bold text-center mb-12 text-gray-800 dark:text-white">Certifications</h3>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {/* Add certification cards here */}
-          </div>
+          <h3 className="text-3xl font-bold text-center mb-12 text-gray-800 dark:text-white"></h3>
+          <Swiper
+            effect={'coverflow'}
+            grabCursor={true}
+            centeredSlides={true}
+            slidesPerView={'auto'}
+            coverflowEffect={{
+              rotate: 0,
+              stretch: 0,
+              depth: 100,
+              modifier: 2.5,
+            }}
+            pagination={{ clickable: true }}
+            modules={[EffectCoverflow, Pagination]}
+            className="mySwiper"
+          >
+            
+          </Swiper>
         </div>
 
         
