@@ -92,8 +92,22 @@ const Contact = () => {
         ...formData,
         timestamp: new Date().toISOString()
       });
-      // The response is intentionally unused
-      // Reset form after successful submission
+      
+      // Check response data and show appropriate message
+      if (response.data?.success) {
+        setFormData({
+          name: '',
+          email: '',
+          message: '',
+          projectType: '',
+          urgency: 'normal'
+        });
+        setErrors({});
+        setSubmitStatus('success');
+        toast.success(response.data.message || 'Message sent successfully! I will reply as soon as possible.');
+      } else {
+        throw new Error(response.data?.error || 'Failed to send message');
+      }
       setFormData({
         name: '',
         email: '',
