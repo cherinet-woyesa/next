@@ -1,4 +1,5 @@
 'use client';
+import TechVisualizer from './TechVisualizer';
 
 import { motion } from 'framer-motion';
 import { Swiper } from 'swiper/react';

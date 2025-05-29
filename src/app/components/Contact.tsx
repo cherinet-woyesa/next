@@ -93,21 +93,7 @@ const Contact = () => {
         timestamp: new Date().toISOString()
       });
       
-      // Check response data and show appropriate message
-      if (response.data?.success) {
-        setFormData({
-          name: '',
-          email: '',
-          message: '',
-          projectType: '',
-          urgency: 'normal'
-        });
-        setErrors({});
-        setSubmitStatus('success');
-        toast.success(response.data.message || 'Message sent successfully! I will reply as soon as possible.');
-      } else {
-        throw new Error(response.data?.error || 'Failed to send message');
-      }
+      // Reset form
       setFormData({
         name: '',
         email: '',
