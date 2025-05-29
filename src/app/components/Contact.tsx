@@ -88,7 +88,7 @@ const Contact = () => {
 
     try {
       setLoading(true);
-      const response = await axios.post('/api/contact', {
+      await axios.post('/api/contact', {
         ...formData,
         timestamp: new Date().toISOString()
       });

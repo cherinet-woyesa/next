@@ -1,6 +1,4 @@
 'use client';
-import TechVisualizer from './TechVisualizer';
-
 import { motion } from 'framer-motion';
 import { Swiper } from 'swiper/react';
 import { Pagination } from 'swiper/modules';

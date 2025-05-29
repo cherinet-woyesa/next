@@ -1,26 +1,9 @@
 import { NextResponse } from 'next/server';
 
 // Declare nodemailer type
-declare const nodemailer: any;
-let transporter: any;
+import nodemailer from 'nodemailer';
 
-if (typeof window === 'undefined') {
-  const nodemailer = require('nodemailer');
-  transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS
-    }
-  });
-} else {
-  // Mock transporter for client-side
-  transporter = {
-    sendMail: () => Promise.resolve()
-  };
-}
-
-export async function POST(request: Request) {
+export async function POST(request: Request): Promise<Response> {
   try {
     const { name, email, message, projectType, urgency } = await request.json();
 
