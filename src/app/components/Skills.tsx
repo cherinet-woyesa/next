@@ -1,13 +1,7 @@
 'use client';
 import { motion } from 'framer-motion';
-import { Swiper } from 'swiper/react';
-import { Pagination } from 'swiper/modules';
-import { EffectCoverflow } from 'swiper/modules';
 import Image from 'next/image';
 import { FaCode, FaServer, FaMobileAlt, FaDatabase, FaCloud } from 'react-icons/fa';
-import 'swiper/css';
-import 'swiper/css/effect-coverflow';
-import 'swiper/css/pagination';
 
 const SkillsPage = () => {
   // Skill categories with icons

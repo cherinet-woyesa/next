@@ -1,10 +1,11 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { FaBars, FaTimes, FaHome, FaUser, FaCode, FaProjectDiagram, FaEnvelope, FaSun, FaMoon } from 'react-icons/fa';
+
+import { FaHome, FaUser, FaCode, FaProjectDiagram, FaEnvelope } from 'react-icons/fa';
 
 const navItems = [
   { name: 'Home', path: '/', icon: FaHome },
@@ -14,10 +15,9 @@ const navItems = [
   { name: 'Contact', path: '/contact', icon: FaEnvelope },
 ];
 
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const [darkMode, setDarkMode] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
 
@@ -33,30 +33,6 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  // Theme toggle logic
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const stored = localStorage.getItem('theme');
-      if (stored) {
-        setDarkMode(stored === 'dark');
-        document.documentElement.classList.toggle('dark', stored === 'dark');
-      } else {
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        setDarkMode(prefersDark);
-        document.documentElement.classList.toggle('dark', prefersDark);
-      }
-    }
-  }, []);
-
-  const toggleDarkMode = () => {
-    setDarkMode((prev) => {
-      const newMode = !prev;
-      localStorage.setItem('theme', newMode ? 'dark' : 'light');
-      document.documentElement.classList.toggle('dark', newMode);
-      return newMode;
-    });
-  };
 
   const handleNavigation = (path: string) => {
     const sectionId = path.slice(1); // Remove the leading slash
@@ -81,7 +57,7 @@ const Navbar = () => {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.7, ease: 'easeOut' }}
       className={`fixed w-full z-50 transition-all duration-300 border-b border-white/20 dark:border-gray-800/60
-        ${scrolled ? 'bg-white/70 dark:bg-gray-900/70 backdrop-blur-xl shadow-2xl' : 'bg-white/30 dark:bg-gray-900/30 backdrop-blur-xl'}
+        ${scrollProgress > 0 ? 'bg-white/70 dark:bg-gray-900/70 backdrop-blur-xl shadow-2xl' : 'bg-white/30 dark:bg-gray-900/30 backdrop-blur-xl'}
       `}
       role="navigation"
       aria-label="Main navigation"

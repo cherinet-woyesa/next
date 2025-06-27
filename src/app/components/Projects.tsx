@@ -169,10 +169,10 @@ const Projects = () => {
                   className="absolute inset-0 z-0 transition-transform duration-500"
                   whileHover={{ scale: 1.07 }}
                 >
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    fill
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  fill
                     className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                 </motion.div>
