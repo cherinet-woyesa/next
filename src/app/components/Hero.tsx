@@ -1,41 +1,91 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useContext, useState } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { FaGithub, FaLinkedin, FaFileDownload, FaSun, FaMoon, FaTelegram, FaFacebook, FaInstagram } from 'react-icons/fa';
 import { useInView } from 'react-intersection-observer';
+import type { ThemeContextType } from '../theme/ThemeProvider';
+import { ThemeContext } from '../theme/ThemeProvider';
+
+// Typewriter effect hook
+function useTypewriter(words: string[], speed = 120, pause = 1200) {
+  const [index, setIndex] = useState<number>(0);
+  const [subIndex, setSubIndex] = useState<number>(0);
+  const [deleting, setDeleting] = useState<boolean>(false);
+  const [blink, setBlink] = useState<boolean>(true);
+  const [loop, setLoop] = useState<number>(0);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    if (loop >= words.length) {
+      setLoop(0);
+    }
+    if (subIndex === words[index].length + 1 && !deleting) {
+      timeoutRef.current = setTimeout(() => setDeleting(true), pause);
+      return;
+    }
+    if (subIndex === 0 && deleting) {
+      setDeleting(false);
+      setIndex((prev: number) => (prev + 1) % words.length);
+      setLoop((prev: number) => prev + 1);
+      return;
+    }
+    timeoutRef.current = setTimeout(() => {
+      setSubIndex((prev: number) => prev + (deleting ? -1 : 1));
+    }, deleting ? speed / 2 : speed);
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, [subIndex, index, deleting, words, speed, pause, loop]);
+
+  useEffect(() => {
+    const blinkInterval = setInterval(() => setBlink((v: boolean) => !v), 500);
+    return () => clearInterval(blinkInterval);
+  }, []);
+
+  return `${words[index].substring(0, subIndex)}${blink ? '|' : ' '}`;
+}
 
 const Hero = () => {
-  const [darkMode, setDarkMode] = useState(false);
+  const { darkMode, toggleDarkMode } = useContext(ThemeContext) as ThemeContextType;
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
 
-  useEffect(() => {
-    // Check for dark mode preference
-    if (typeof window !== 'undefined') {
-      setDarkMode(window.matchMedia('(prefers-color-scheme: dark)').matches);
-    }
-  }, []);
+  // Parallax state
+  const [parallax, setParallax] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+  const bgRef = useRef<HTMLDivElement>(null);
+
+  // Typewriter effect for skills/interests
+  const typewriterText = useTypewriter([
+    'Full Stack Developer',
+    'React Enthusiast',
+    'Node.js & Next.js Expert',
+    'UI/UX Lover',
+    'Open Source Contributor',
+  ]);
 
   useEffect(() => {
-    // Check for dark mode preference
-    setDarkMode(window.matchMedia('(prefers-color-scheme: dark)').matches);
+    // Parallax effect handler
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!bgRef.current) return;
+      const { innerWidth, innerHeight } = window;
+      const x = (e.clientX / innerWidth - 0.5) * 20; // max 10px left/right
+      const y = (e.clientY / innerHeight - 0.5) * 20; // max 10px up/down
+      setParallax({ x, y });
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
-
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-    document.documentElement.classList.toggle('dark', !darkMode);
-  };
 
   const socialLinks = [
-    { icon: <FaGithub />, url: "https://github.com/cherinet-woyesa" },
-    { icon: <FaLinkedin />, url: "https://linkedin.com/in/cherinet-woyesa" },
-    { icon: <FaTelegram />, url: "https://t.me/Cherishme" },
-    { icon: <FaFacebook />, url: "https://facebook.com/cherinet_" },
-    { icon: <FaInstagram />, url: "https://instagram.com/cherinetwoyesa" }
+    { icon: <FaGithub />, url: "https://github.com/cherinet-woyesa", label: "GitHub" },
+    { icon: <FaLinkedin />, url: "https://linkedin.com/in/cherinet-woyesa", label: "LinkedIn" },
+    { icon: <FaTelegram />, url: "https://t.me/Cherishme", label: "Telegram" },
+    { icon: <FaFacebook />, url: "https://facebook.com/cherinet_", label: "Facebook" },
+    { icon: <FaInstagram />, url: "https://instagram.com/cherinetwoyesa", label: "Instagram" }
   ];
 
   return (
@@ -45,7 +95,14 @@ const Hero = () => {
       id="home"
     >
       {/* Background Image with Next.js Image component */}
-      <div className="absolute inset-0 z-0">
+      <div
+        className="absolute inset-0 z-0"
+        ref={bgRef}
+        style={{
+          transform: `translate3d(${parallax.x}px, ${parallax.y}px, 0)`,
+          transition: 'transform 0.2s cubic-bezier(0.4,0,0.2,1)',
+        }}
+      >
         <Image
           src="/prof.jpg"
           alt="Background"
@@ -78,11 +135,17 @@ const Hero = () => {
             href={social.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-white/20 backdrop-blur-sm p-3 rounded-full text-white hover:bg-white/30 transition-colors"
+            className="bg-white/20 backdrop-blur-sm p-3 rounded-full text-white hover:bg-white/30 transition-colors relative group"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
+            aria-label={social.label}
+            tabIndex={0}
           >
             <span className="text-xl">{social.icon}</span>
+            {/* Tooltip */}
+            <span className="absolute left-full top-1/2 -translate-y-1/2 ml-2 px-2 py-1 rounded bg-black text-white text-xs opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50">
+              {social.label}
+            </span>
           </motion.a>
         ))}
       </div>
@@ -96,9 +159,10 @@ const Hero = () => {
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight">
             Hi, I&apos;m <span className="text-yellow-300 bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-500">Cherinet Woyesa</span>
           </h1>
-          
-          <p className="text-2xl text-gray-600 dark:text-gray-400 mb-8">Full Stack Developer</p>
-
+          {/* Animated typewriter effect for role/skills */}
+          <p className="text-2xl text-gray-600 dark:text-gray-400 mb-8 min-h-[40px] font-mono">
+            {typewriterText}
+          </p>
 
           <div className="text-xl md:text-2xl mb-8 min-h-[60px] font-mono">
             <motion.div
@@ -154,13 +218,15 @@ const Hero = () => {
 
       {/* Scroll indicator */}
       <motion.div 
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-50"
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-50 flex flex-col items-center"
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 1.5, repeat: Infinity }}
+        aria-label="Scroll down indicator"
       >
-        <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-7 h-7 text-white animate-bounce-slow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
         </svg>
+        <span className="text-xs text-white mt-1 animate-pulse">Scroll Down</span>
       </motion.div>
 
       {/* Micro-interaction elements */}

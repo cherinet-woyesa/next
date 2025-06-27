@@ -50,16 +50,23 @@ const SkillsPage = () => {
     { name: 'Python', level: 75, logo: '/py.jfif' }
   ];
 
-  // Certifications
-  
+  // const certifications = [
+  //   {
+  //     title: 'Certified Web Developer',
+  //     image: '/CHERINET.pdf', // Use a PDF icon or a certificate image if available
+  //     url: '/CHERINET.pdf',
+  //   },
+  //   // Add more certifications as needed
+  // ];
+
   return (
-    <section id="skills" className="py-20 bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
+    <section id="skills" className="py-20 bg-gray-50 dark:bg-gray-900">
       <div className="container mx-auto px-4">
-        {/* Header */}
+        {/* Header with subtle entrance animation */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.5, ease: 'easeOut' }}
           viewport={{ once: true }}
           className="text-center mb-16"
         >
@@ -81,10 +88,17 @@ const SkillsPage = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow"
+              className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow"
+              whileHover={{ scale: 1.05, y: -4, boxShadow: '0 4px 16px 0 rgba(37,99,235,0.10)' }}
+              whileTap={{ scale: 0.97 }}
             >
               <div className="flex flex-col items-center text-center">
-                <div className="mb-4">{category.icon}</div>
+                <motion.div
+                  whileHover={{ scale: 1.08 }}
+                  className="mb-4 transition-transform duration-200"
+                >
+                  {category.icon}
+                </motion.div>
                 <h3 className="text-xl font-bold mb-3 text-gray-800 dark:text-white">{category.name}</h3>
                 <ul className="space-y-2">
                   {category.skills.map((skill, i) => (
@@ -110,9 +124,14 @@ const SkillsPage = () => {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
                 className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md"
+                whileHover={{ scale: 1.05, y: -4, boxShadow: '0 4px 16px 0 rgba(37,99,235,0.10)' }}
+                whileTap={{ scale: 0.97 }}
               >
                 <div className="flex items-center mb-4">
-                  <div className="relative w-12 h-12 mr-4">
+                  <motion.div
+                    whileHover={{ scale: 1.08 }}
+                    className="relative w-12 h-12 mr-4 transition-transform duration-200"
+                  >
                     <Image
                       src={tech.logo}
                       alt={tech.name}
@@ -120,24 +139,28 @@ const SkillsPage = () => {
                       className="object-contain"
                       loading="lazy"
                     />
-                  </div>
+                  </motion.div>
                   <h4 className="text-xl font-semibold text-gray-800 dark:text-white">{tech.name}</h4>
                   <span className="ml-auto text-gray-600 dark:text-gray-400">{tech.level}%</span>
                 </div>
                 <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3">
-                  <div
-                    className="h-3 rounded-full bg-gradient-to-r from-blue-500 to-purple-600"
-                    style={{ width: `${tech.level}%` }}
-                  ></div>
+                  <motion.div
+                    className="h-3 rounded-full bg-blue-500"
+                    initial={{ width: 0 }}
+                    whileInView={{ width: `${tech.level}%` }}
+                    transition={{ duration: 1, delay: 0.2 + index * 0.1 }}
+                    viewport={{ once: true }}
+                  />
                 </div>
               </motion.div>
             ))}
           </div>
         </div>
 
-        {/* Certifications Carousel */}
+        {/* Certifications Carousel (commented out for now) */}
+        {/**
         <div className="mb-20">
-          <h3 className="text-3xl font-bold text-center mb-12 text-gray-800 dark:text-white"></h3>
+          <h3 className="text-3xl font-bold text-center mb-12 text-gray-800 dark:text-white">Certifications</h3>
           <Swiper
             effect={'coverflow'}
             grabCursor={true}
@@ -153,11 +176,35 @@ const SkillsPage = () => {
             modules={[EffectCoverflow, Pagination]}
             className="mySwiper"
           >
-            
+            {certifications.length > 0 ? certifications.map((cert, idx) => (
+              <motion.div
+                key={idx}
+                className="swiper-slide flex flex-col items-center justify-center bg-white/80 dark:bg-gray-800/80 rounded-2xl shadow-xl p-8 mx-4 min-w-[260px] max-w-xs border border-blue-100 dark:border-blue-900"
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: idx * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <a href={cert.url} target="_blank" rel="noopener noreferrer" className="flex flex-col items-center group">
+                  <div className="w-24 h-32 mb-4 relative flex items-center justify-center">
+                    <Image
+                      src={cert.image}
+                      alt={cert.title}
+                      fill
+                      className="object-contain rounded-lg group-hover:scale-105 transition-transform duration-300 shadow-lg"
+                    />
+                  </div>
+                  <span className="text-lg font-semibold text-blue-600 dark:text-blue-400 text-center group-hover:underline">{cert.title}</span>
+                </a>
+              </motion.div>
+            )) : (
+              <div className="swiper-slide flex flex-col items-center justify-center bg-white/80 dark:bg-gray-800/80 rounded-2xl shadow-xl p-8 mx-4 min-w-[260px] max-w-xs border border-blue-100 dark:border-blue-900">
+                <span className="text-gray-400">No certifications yet.</span>
+              </div>
+            )}
           </Swiper>
         </div>
-
-        
+        */}
       </div>
     </section>
   );

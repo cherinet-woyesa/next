@@ -218,10 +218,12 @@ const Contact = () => {
               </div>
 
               <div className="flex items-center gap-4">
-                <button
+                <motion.button
                   type="submit"
                   disabled={loading}
-                  className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-70"
+                  className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-70 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 shadow-md"
+                  whileHover={{ scale: 1.05, boxShadow: '0 4px 16px 0 rgba(37, 99, 235, 0.10)' }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   {loading ? (
                     'Sending...'
@@ -230,7 +232,7 @@ const Contact = () => {
                       <FiSend /> Send Message
                     </>
                   )}
-                </button>
+                </motion.button>
               </div>
 
               <AnimatePresence>

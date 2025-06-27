@@ -41,9 +41,10 @@ export const Chatbot = ({ onAnswer }: ChatbotProps) => {
     <>
       <motion.button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-4 right-4 p-4 bg-blue-600 text-white rounded-full shadow-lg hover:bg-blue-700 transition-colors"
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
+        className="fixed bottom-4 right-4 p-4 bg-blue-600 text-white rounded-full shadow-lg hover:bg-blue-700 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
+        whileHover={{ scale: 1.1, boxShadow: '0 4px 16px 0 rgba(37, 99, 235, 0.10)' }}
+        whileTap={{ scale: 0.95 }}
+        aria-label="Open chatbot"
       >
         <FiMessageSquare size={24} />
       </motion.button>
@@ -58,7 +59,11 @@ export const Chatbot = ({ onAnswer }: ChatbotProps) => {
           >
             <div className="p-4 bg-blue-600 text-white flex justify-between items-center">
               <h3 className="font-semibold">Schedule a Meeting</h3>
-              <button onClick={() => setIsOpen(false)} className="hover:text-gray-200">
+              <button
+                onClick={() => setIsOpen(false)}
+                className="hover:text-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
+                aria-label="Close chatbot"
+              >
                 <FiX size={20} />
               </button>
             </div>
@@ -88,13 +93,15 @@ export const Chatbot = ({ onAnswer }: ChatbotProps) => {
               <div className="p-4 border-t border-gray-200 dark:border-gray-700">
                 <div className="grid grid-cols-2 gap-2">
                   {['Web Development', 'Mobile App', 'UI/UX Design', 'Consulting'].map((option) => (
-                    <button
+                    <motion.button
                       key={option}
                       onClick={() => handleUserResponse(option)}
-                      className="p-2 text-sm bg-gray-100 dark:bg-gray-700 rounded hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                      className="p-2 text-sm bg-gray-100 dark:bg-gray-700 rounded hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
+                      whileHover={{ scale: 1.05, boxShadow: '0 2px 8px 0 rgba(37, 99, 235, 0.10)' }}
+                      whileTap={{ scale: 0.95 }}
                     >
                       {option}
-                    </button>
+                    </motion.button>
                   ))}
                 </div>
               </div>
